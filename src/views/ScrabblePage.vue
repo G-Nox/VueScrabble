@@ -1,0 +1,149 @@
+<template>
+  <div>
+    <div class="container my-2">
+      <div class="row">
+        <div class="col">
+          <Grid />
+          <Hand />
+        </div>
+        <div class="col">
+          <Info />
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+import Grid from "../components/v-grid";
+import Hand from "../components/v-hand";
+import Info from "../components/v-info";
+
+export default {
+  name: "ScrabblePage",
+  data() {
+    return {};
+  },
+  components: {
+    Grid,
+    Hand,
+    Info,
+  },
+  methods: {},
+};
+</script>
+
+<style scoped>
+.header {
+  padding: 2em;
+  width: 100%;
+  background-color: red;
+}
+
+.playPage {
+  display: flex;
+  /*background: linear-gradient(180deg, #f8fff8 20%, #d9e7ff 100%);*/
+  height: 100%;
+  width: 100%;
+  margin-top: 6.5em;
+}
+
+.myGrid {
+  display: flex;
+  padding: 0.5em;
+  flex-direction: column;
+  align-items: center;
+}
+
+.myRow {
+  display: flex;
+}
+
+.myCell {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  min-width: 2.3em;
+  min-height: 2.3em;
+  border-radius: 0.3em;
+  margin: 0.1em;
+
+  background: #f0f0f0;
+  box-shadow: inset 2px 2px 3px 3px rgba(150, 150, 150, 0.2);
+
+  font-weight: bold;
+}
+
+.double {
+  background-color: #ffe252;
+}
+
+.triple {
+  background-color: #f85c5c;
+}
+
+.myLabel {
+  border: none;
+  background: #4d8080;
+  color: white;
+  box-shadow: none;
+}
+
+.myHand {
+  display: flex;
+  padding: 0.5em;
+  background: #4d8080;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.myCard {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  min-width: 2.3em;
+  min-height: 2.3em;
+  border-radius: 0.3em;
+  margin: 0.1em;
+
+  /* background-image: url("../images/card.png"); */
+  background-size: cover;
+  box-shadow: 2px 2px 1px 1px rgba(100, 100, 100, 0.2);
+  font-weight: bold;
+}
+
+.myCharacter {
+  font-size: 1.2em;
+}
+
+.myPoint {
+  position: absolute;
+  right: 0.2em;
+  bottom: 0.08em;
+  font-size: 0.7em;
+}
+
+.playerpoint {
+  font-size: 3em;
+  font-weight: bold;
+}
+
+.active {
+  color: red;
+}
+
+.activeDiv {
+  border: 2px solid #4d8080;
+}
+
+.home img {
+  width: 30%;
+  min-width: 200px;
+}
+
+.btn svg {
+  margin: 0 3px 3px 0;
+}
+</style>
