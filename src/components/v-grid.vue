@@ -1,5 +1,5 @@
 <template>
-    <v-card class="myGrid my-2">
+    <v-card class="myGrid mb-2">
         <div class="myRow">
             <div class="myCell myLabel"></div>
             <div v-for="n in size" class="myCell myLabel" :key="n">

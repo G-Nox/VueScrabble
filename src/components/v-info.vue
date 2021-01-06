@@ -1,20 +1,21 @@
 <template>
-    <v-container class="info">
-        <v-row class="my-2">
-            <v-col class="pr-1">
+    <v-container class="pa-0">
+    <v-card class="pa-4" elevation="3">
+        <v-row class="d-flex mb-2 justify-space-between">
+            <v-col>
                 <v-card
-                    class="pa-3"
+                    class="pa-2"
                     :class="{ active: isPlayerA }"
                 >
-                    Player A: <span class="playerpoint">{{ point.A }}</span>
+                    Player A: <br><span class="playerpoint">{{ point.A }}</span>
                 </v-card>
             </v-col>
-            <v-col class="pl-1">
+            <v-col>
                 <v-card
-                    class="pa-3"
+                    class="pa-2"
                     :class="{ active: !isPlayerA }"
                 >
-                    Player B: <span class="playerpoint">{{ point.B }}</span>
+                    Player B: <br><span class="playerpoint">{{ point.B }}</span>
                 </v-card>
             </v-col>
         </v-row>
@@ -24,6 +25,7 @@
             <PlayerChooser/>
         </div>
          <VButtons/>
+    </v-card>
     </v-container>
 </template>
 
@@ -58,5 +60,9 @@ export default {
 <style scoped>
 .active {
     color: red;
+}
+.playerpoint {
+    font-size: 3em;
+    font-weight: bold;
 }
 </style>

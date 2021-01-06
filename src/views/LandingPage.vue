@@ -10,10 +10,10 @@
         <v-row>
             <v-col class="d-flex flex-column align-stretch">
                 <v-card
-                    elevation="5"
+                    elevation="3"
                     class="pa-4 mb-2"
                 >
-                    <h1 class="my-2">MATH SCRABBLE</h1>
+                    <h1 class="mb-2">MATH SCRABBLE</h1>
                     "Math Scrabble" (or "Number Scrabble") is a game based on normal
                     Scrabble, but you make equations instead of words.
                     The letter tiles used in Scrabble are replaced with numbers and
@@ -23,10 +23,10 @@
                     tiles.
                 </v-card>
                 <v-card
-                    elevation="5"
+                    elevation="3"
                     class="pa-4 mt-2 flex-grow-1"
                 >
-                    <h2 class="my-2">The Rules</h2>
+                    <h2 class="mb-2">The Rules</h2>
                     <ul>
                         <li>Except as noted, game play is similar to normal Scrabble</li>
                         <li>
@@ -84,7 +84,7 @@
             </v-col>
             <v-col>
                 <v-card
-                    elevation="5"
+                    elevation="3"
                     class="pa-4 mx-auto"
                 >
                     <h2 class="my-2">Score</h2>

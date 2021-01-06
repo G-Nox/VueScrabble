@@ -110,15 +110,10 @@ export default {
 }
 
 .myPoint {
-  position: absolute;
-  right: 0.2em;
-  bottom: 0.08em;
-  font-size: 0.7em;
-}
-
-.playerpoint {
-  font-size: 3em;
-  font-weight: bold;
+    position: absolute;
+    right: 0.2em;
+    bottom: 0.08em;
+    font-size: 0.7em;
 }
 
 .active {

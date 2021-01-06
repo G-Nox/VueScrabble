@@ -4,6 +4,7 @@
             v-model="player"
             :items="items"
             solo
+            hide-details
             label="Please select a player">
         </v-select>
     </v-card>

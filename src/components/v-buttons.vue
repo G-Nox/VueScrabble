@@ -1,52 +1,39 @@
 <template>
     <v-container v-if="show" class="my-2">
         <v-row>
-            <v-col>
-                <v-btn
-                    block
-                    elevation="2"
-                    class="my-1"
-                    @click="newgame"
-                >
-                    <v-icon>
-                        mdi-plus-box
-                    </v-icon>
-                    new game
-                </v-btn>
-
-
-                <div class="dropdown show btn-block">
-                    <a
-                        class="btn dropdown-toggle btn-primary btn-block text-left"
-                        href="#"
-                        role="button"
-                        data-toggle="dropdown"
-                        aria-haspopup="true"
-                        aria-expanded="false"
+            <v-col class="pa-0">
+                <v-select
+                    v-model="select"
+                    :items="sizes"
+                    item-text="name"
+                    item-value="val"
+                    label="Resize"
+                    solo
+                    hide-details
+                    prepend-icon="mdi-grid">
+                </v-select>
+                <v-hover v-slot="{ hover }">
+                    <v-btn
+                        elevation="2"
+                        rounded
+                        block
+                        large
+                        class="d-flex pa-4 my-2"
+                        @click="newgame"
                     >
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="18"
-                            height="18"
-                            fill="currentColor"
-                            class="bi bi-grid-3x3-gap-fill"
-                            viewBox="0 0 16 16"
-                        >
-                            <path
-                                d="M1 2a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V2zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1V2zM1 7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V7zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1V7zM1 12a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1v-2zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1v-2zm5 0a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-2z"
-                            />
-                        </svg>
-                        Resize
-                    </a>
-                    <div
-                        class="dropdown-menu btn-block"
-                        aria-labelledby="dropdownMenuLink"
-                    >
-                        <button class="dropdown-item" @click="resize(3)">3x3</button>
-                        <button class="dropdown-item" @click="resize(9)">9x9</button>
-                        <button class="dropdown-item" @click="resize(15)">15x15</button>
-                    </div>
-                </div>
+                        <v-icon class="text-left">
+                            mdi-plus-box
+                        </v-icon>
+                        <v-expand-x-transition>
+                            <div
+                                v-if="hover"
+                                class="darken-3 black--text font-weight-bold"
+                            >
+                                new game
+                            </div>
+                        </v-expand-x-transition>
+                    </v-btn>
+                </v-hover>
                 <v-btn
                     block
                     elevation="2"
@@ -93,6 +80,21 @@
 
 export default {
     name: "Buttons",
+    data() {
+        return {
+            select: {},
+            sizes: [
+                {name: '3x3', val:'3'},
+                {name: '9x9', val:'9'},
+                {name: '15x15', val:'15'},
+            ]
+        }
+    },
+    watch: {
+        select: function (newSize) {
+            this.resize(newSize)
+        }
+    },
     computed: {
         player() {
             return this.$store.state.player
@@ -105,12 +107,9 @@ export default {
         newgame() {
             this.$store.state.socket.send("new")
         },
-        // resize(size) {
-        //   $.ajax({
-        //     method: "GET",
-        //     url: "/scrabble/resize/" + size,
-        //   });
-        // },
+        resize(size) {
+            this.$store.state.socket.send("resize/"+size)
+        },
         undo() {
             this.$store.state.socket.send("undo")
         },
@@ -127,4 +126,16 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.v-card--reveal {
+    align-items: center;
+    bottom: 0;
+    justify-content: center;
+    opacity: .5;
+    position: absolute;
+    width: 100%;
+}
+.v-btn{
+    justify-content: left;
+}
+</style>
