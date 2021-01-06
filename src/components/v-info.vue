@@ -21,21 +21,21 @@
         <div class="card bg-white my-2 p-3">
             <p>cards in stack: {{ pile }}</p>
             <p>you are player: {{ player }}</p>
-            <PlayerCooser/>
+            <PlayerChooser/>
         </div>
-        <!-- <Buttons /> -->
+         <VButtons/>
     </v-container>
 </template>
 
 <script>
-import PlayerCooser from "../components/v-player-cooser.vue";
-// import Buttons from "../components/v-buttons.vue";
+import PlayerChooser from "./v-player-chooser.vue";
+import VButtons from "../components/v-buttons.vue";
 
 export default {
     name: "Info",
     components: {
-        PlayerCooser,
-        // Buttons,
+        PlayerChooser,
+        VButtons,
     },
     methods: {},
     computed: {
