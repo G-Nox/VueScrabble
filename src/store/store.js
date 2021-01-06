@@ -130,7 +130,7 @@ const store = new Vuex.Store({
             } catch (e) {
                 console.error(e)
             }
-        }
+        },
     },
 
 });

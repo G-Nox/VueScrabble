@@ -74,14 +74,6 @@ export default {
   font-weight: bold;
 }
 
-.double {
-  background-color: #ffe252;
-}
-
-.triple {
-  background-color: #f85c5c;
-}
-
 .myLabel {
   border: none;
   background: #4d8080;
@@ -134,7 +126,7 @@ export default {
 }
 
 .activeDiv {
-  border: 2px solid #4d8080;
+  border: 2px solid #ff0000;
 }
 
 .home img {

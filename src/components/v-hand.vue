@@ -1,46 +1,56 @@
 <template>
-  <div
-    v-if="store.state.player === store.state.turn"
-    class="myHand rounded my-2"
-  >
-    <div v-if="store.state.player === 'A'">
-      <div
-        v-for="card in store.hand.A"
-        class="myCard inHand"
-        @click="chooseCard"
-        :key="`playerA${card}`"
-      >
-        <div class="myCharacter">{{ card.value }}</div>
-        <div class="myPoint">{{ card_point[card.value] }}</div>
-      </div>
+    <div v-if="showHand">
+        <div v-if="player === 'A'" class="myHand my-2">
+            <div
+                v-for="(card, index) in hand.A"
+                class="myCard inHand"
+                @click="chooseCard"
+                :key="index"
+            >
+                <div class="myCharacter">{{ card.value }}</div>
+<!--                <div class="myPoint">{{ point(card.value) }}</div>-->
+            </div>
+        </div>
+        <div v-if="player === 'B'" class="myHand my-2">
+            <div
+                v-for="(card, index) in hand.B"
+                class="myCard inHand"
+                @click="chooseCard"
+                :key="index"
+            >
+                <div class="myCharacter">{{ card.value }}</div>
+<!--                <div class="myPoint">{{ point(card.value) }}</div>-->
+            </div>
+        </div>
     </div>
-    <div v-if="store.state.player === 'B'">
-      <div
-        v-for="card in hand.B"
-        class="myCard inHand"
-        @click="chooseCard"
-        :key="`playerB${card}`"
-      >
-        <div class="myCharacter">{{ card.value }}</div>
-        <div class="myPoint">{{ card_point[card.value] }}</div>
-      </div>
-    </div>
-  </div>
 </template>
 
 <script>
-import store from "../store/store";
+import $ from "jquery";
 
 export default {
-  name: "Hand",
-  data() {
-    return { store };
-  },
-  methods: {
-    // chooseCard: function(ev) {
-    //   return recolor(ev.currentTarget, $(".inHand"));
-    // },
-  },
+    name: "Hand",
+    computed: {
+        player() {
+            return this.$store.state.player
+        },
+        hand() {
+            console.log(this.$store.state.hand)
+            return this.$store.state.hand
+        },
+        point(card) {
+            return this.$store.getters.getPoint(card)
+        },
+        showHand() {
+            return this.$store.state.turn === this.player
+        }
+    },
+    methods: {
+        chooseCard: function(ev) {
+            $(".inHand").removeClass("activeDiv")
+            ev.currentTarget.classList.add("activeDiv")
+        },
+    },
 };
 </script>
 
