@@ -1,60 +1,58 @@
 <template>
-    <v-app :style="{background: $vuetify.theme.themes[theme].background}">
-        <v-app-bar app color="primary" dark>
-            <div class="d-flex align-center">
-                <v-img
-                    alt="Vuetify Logo"
-                    contain
-                    src="./assets/logo_long.png"
-                    transition="scale-transition"
-                    max-width="200"
-                />
-            </div>
+  <v-app :style="{ background: $vuetify.theme.themes[theme].background }">
+    <v-app-bar app color="primary" dark>
+      <div class="d-flex align-center">
+        <v-img
+          alt="Vuetify Logo"
+          contain
+          src="./assets/logo_long.png"
+          transition="scale-transition"
+          max-width="200"
+        />
+      </div>
 
-            <v-spacer></v-spacer>
+      <v-spacer></v-spacer>
+      <router-link class="mr-2" to="/">
+        <v-btn class="white--text primary" target="_blank" text> Home </v-btn>
+      </router-link>
+      <router-link class="mr-2" to="/scrabble">
+        <v-btn class="white--text primary" target="_blank" text> Play </v-btn>
+      </router-link>
+    </v-app-bar>
 
-            <v-btn
-                href="https://github.com/vuetifyjs/vuetify/releases/latest"
-                target="_blank"
-                text
-            >
-                <span class="mr-2">Latest Release</span>
-                <v-icon>mdi-open-in-new</v-icon>
-            </v-btn>
-        </v-app-bar>
-
-        <v-main>
-            <LandingPage/>
-            <ScrabblePage/>
-        </v-main>
-        <link href="https://cdn.jsdelivr.net/npm/@mdi/font@5.x/css/materialdesignicons.min.css" rel="stylesheet">
-    </v-app>
+    <v-main>
+      <router-view />
+      <!-- <LandingPage />
+      <ScrabblePage /> -->
+    </v-main>
+    <link href="Scrabble" rel="stylesheet" />
+  </v-app>
 </template>
 
 <script>
-import LandingPage from "./views/LandingPage";
-import ScrabblePage from "./views/ScrabblePage.vue";
+// import LandingPage from "./views/LandingPage";
+// import ScrabblePage from "./views/ScrabblePage.vue";
 
 export default {
-    name: "App",
+  name: "App",
 
-    components: {
-        LandingPage,
-        ScrabblePage,
+  //   components: {
+  //     ScrabblePage,
+  //     LandingPage,
+  //   },
+
+  data: () => ({
+    //
+  }),
+
+  computed: {
+    theme() {
+      return this.$vuetify.theme.dark ? "dark" : "light";
     },
+  },
 
-    data: () => ({
-        //
-    }),
-
-    computed: {
-        theme() {
-            return (this.$vuetify.theme.dark) ? 'dark' : 'light'
-        }
-    },
-
-    mounted() {
-        this.$store.dispatch('connectWebsocket')
-    }
+  mounted() {
+    this.$store.dispatch("connectWebsocket");
+  },
 };
 </script>
