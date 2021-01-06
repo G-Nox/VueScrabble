@@ -1,14 +1,13 @@
 <template>
-  <v-app>
+  <v-app :style="{background: $vuetify.theme.themes[theme].background}">
     <v-app-bar app color="primary" dark>
       <div class="d-flex align-center">
         <v-img
           alt="Vuetify Logo"
-          class="shrink mr-2"
           contain
-          src="assets/logo_long.png"
+          src="./assets/logo_long.png"
           transition="scale-transition"
-          width="40"
+          max-width="200"
         />
       </div>
 
@@ -46,5 +45,11 @@ export default {
   data: () => ({
     //
   }),
+
+    computed:{
+        theme(){
+            return (this.$vuetify.theme.dark) ? 'dark' : 'light'
+        }
+    }
 };
 </script>

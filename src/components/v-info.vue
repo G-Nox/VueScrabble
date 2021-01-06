@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import store from "../store";
+import store from "../store/store";
 import PlayerCouser from "../components/v-player-cooser.vue";
 // import Buttons from "../components/v-buttons.vue";
 
