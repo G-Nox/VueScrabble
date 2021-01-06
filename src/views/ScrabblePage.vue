@@ -9,6 +9,12 @@
           <Info />
         </v-col>
       </v-row>
+        <v-overlay :value="!isConnected">
+            <v-progress-circular
+                indeterminate
+                size="64"
+            ></v-progress-circular>
+        </v-overlay>
     </v-container>
 </template>
 
@@ -19,15 +25,15 @@ import Info from "../components/v-info";
 
 export default {
   name: "ScrabblePage",
-  data() {
-    return {};
-  },
   components: {
     Grid,
     Hand,
     Info,
   },
     computed: {
+      isConnected() {
+          return this.$store.state.isConnected
+      }
     },
 };
 </script>

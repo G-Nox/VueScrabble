@@ -6,17 +6,16 @@
             block
             large
             class="d-flex pa-4 my-2"
-            @click="newgame"
         >
             <v-icon class="text-left">
-                mdi-plus-box
+                {{ icon }}
             </v-icon>
             <v-expand-x-transition>
                 <div
                     v-if="hover"
                     class="darken-3 black--text font-weight-bold"
                 >
-                    new game
+                    {{ name }}
                 </div>
             </v-expand-x-transition>
         </v-btn>
@@ -27,8 +26,8 @@
 export default {
     name: "v-hover-button",
     props: {
-        icons: "",
-
+        name: {type: String, required: true},
+        icon: {type: String, required: true},
     }
 }
 </script>

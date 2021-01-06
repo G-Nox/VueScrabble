@@ -106,7 +106,7 @@ const store = new Vuex.Store({
         async websocketOnMessage({ commit }, message) {
             try {
                 const res = JSON.parse(message.data)
-                console.log(res)
+                // console.log(res)
                 switch(res.Event) {
                     case "InvalidEquation()":
                         alert("invalid equation")
@@ -131,6 +131,10 @@ const store = new Vuex.Store({
                 console.error(e)
             }
         },
+        async sendCommand({ commit }, message) {
+            commit("setIsConnected", true)
+            this.state.socket.send(message)
+        }
     },
 
 });

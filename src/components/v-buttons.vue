@@ -12,74 +12,33 @@
                     hide-details
                     prepend-icon="mdi-grid">
                 </v-select>
-                <v-hover v-slot="{ hover }">
-                    <v-btn
-                        elevation="2"
-                        rounded
-                        block
-                        large
-                        class="d-flex pa-4 my-2"
-                        @click="newgame"
-                    >
-                        <v-icon class="text-left">
-                            mdi-plus-box
-                        </v-icon>
-                        <v-expand-x-transition>
-                            <div
-                                v-if="hover"
-                                class="darken-3 black--text font-weight-bold"
-                            >
-                                new game
-                            </div>
-                        </v-expand-x-transition>
-                    </v-btn>
-                </v-hover>
-                <v-btn
-                    block
-                    elevation="2"
-                    class="my-1"
-                    @click="undo"
-                >
-                    <v-icon>mdi-arrow-left-bold-box</v-icon>
-                    undo
-                </v-btn>
-
-                <v-btn
-                    block
-                    elevation="2"
-                    class="my-1"
-                    @click="redo"
-                >
-                    <v-icon>mdi-arrow-right-bold-box</v-icon>
-                    redo
-                </v-btn>
-                <v-btn
-                    block
-                    elevation="2"
-                    class="my-1"
-                    @click="switch_card"
-                >
-                    <v-icon>mdi-reload</v-icon>
-                    switch cards
-                </v-btn>
-                <v-btn
-                    block
-                    elevation="2"
-                    class="my-1"
-                    @click="submit"
-                >
-                    <v-icon>mdi-checkbox-marked</v-icon>
-                    submit
-                </v-btn>
+                <div @click="newgame">
+                    <vHoverButton name="new game" icon="mdi-plus-box"/>
+                </div>
+                <div  @click="undo">
+                    <vHoverButton name="undo" icon="mdi-arrow-left-bold-box"/>
+                </div>
+                <div @click="redo">
+                    <vHoverButton name="redo" icon="mdi-arrow-right-bold-box"/>
+                </div>
+                <div @click="switch_card">
+                    <vHoverButton name="switch cards" icon="mdi-reload"/>
+                </div>
+                <div @click="submit">
+                    <vHoverButton name="submit" icon="mdi-checkbox-marked"/>
+                </div>
             </v-col>
         </v-row>
     </v-container>
 </template>
 
 <script>
-
+import vHoverButton from "./v-hover-button"
 export default {
     name: "Buttons",
+    components: {
+        vHoverButton
+    },
     data() {
         return {
             select: {},
@@ -105,22 +64,22 @@ export default {
     },
     methods: {
         newgame() {
-            this.$store.state.socket.send("new")
+            this.$store.dispatch("sendCommand", "new")
         },
         resize(size) {
-            this.$store.state.socket.send("resize/"+size)
+            this.$store.dispatch("sendCommand", "resize/"+size)
         },
         undo() {
-            this.$store.state.socket.send("undo")
+            this.$store.dispatch("sendCommand", "undo")
         },
         redo() {
-            this.$store.state.socket.send("redo")
+            this.$store.dispatch("sendCommand", "redo")
         },
         switch_card() {
-            this.$store.state.socket.send("switch/"+this.player)
+            this.$store.dispatch("sendCommand", "switch/"+this.player)
         },
         submit() {
-            this.$store.state.socket.send("submit")
+            this.$store.dispatch("sendCommand", "submit")
         },
     },
 };
