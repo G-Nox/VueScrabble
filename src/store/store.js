@@ -2,9 +2,12 @@ import Vue from "vue";
 import Vuex from "vuex";
 
 Vue.use(Vuex);
+let webSocket;
 
 const store = new Vuex.Store({
     state: {
+        socket: null,
+        isConnected: false,
         size: 15,
         cells: [],
         turn: "",
@@ -36,15 +39,25 @@ const store = new Vuex.Store({
             {"card": "0", "point": 1}
         ]
     },
-    mutation: {
-        setGrid(state, size, cells) {
-            state.size = size
+    getters: {
+         getPoint: (state) => (c) => {
+             return state.card_point.filter(pair => pair["card"] === c)[0].point
+         }
+    },
+    mutations: {
+        connectToSocket (state, socket) {
+            state.socket = socket
+        },
+        setGrid(state, cells) {
+            state.size = cells.length
             state.cells = cells
         },
         setPlayer(state, player) {
             state.player = player
         },
-        setHandAndPoint(state, playerA, playerB) {
+        setHandAndPoint(state, playerList) {
+            let playerA = playerList.A
+            let playerB = playerList.B
             state.hand.A = playerA.hand
             state.hand.B = playerB.hand
             state.point.A = playerA.point
@@ -59,12 +72,65 @@ const store = new Vuex.Store({
             } else {
                 state.turn = "B"
             }
+        },
+        setIsConnected(state, bool) {
+            state.isConnected = bool
         }
     },
     actions: {
-        async test() {
+        async connectWebsocket({ dispatch, commit }) {
+            webSocket = new WebSocket('ws://localhost:9000/websocket')
+            console.info('Connecting to WebSocket...')
 
+            webSocket.onopen = () => {
+                console.info('Connected to server: ' + webSocket.url)
+                webSocket.send('connect')
+                commit('setIsConnected', true);
+            }
+
+            webSocket.onmessage = message => dispatch('websocketOnMessage', message)
+
+            webSocket.onerror = event => console.error(event)
+            webSocket.onclose = () => {
+                setTimeout(() => {
+                    dispatch('connectWebsocket');
+                    setTimeout( () => {
+                        if (webSocket.readyState === WebSocket.CLOSED) {
+                            commit('setIsConnected', false);
+                        }
+                    }, 500);
+                }, 2000);
+            }
+            commit('connectToSocket', webSocket)
         },
+        async websocketOnMessage({ commit }, message) {
+            try {
+                const res = JSON.parse(message.data)
+                console.log(res)
+                switch(res.Event) {
+                    case "InvalidEquation()":
+                        alert("invalid equation")
+                        commit('setGrid', res.gameField.grid.cells)
+                        commit('setPile', res.gameField.pile)
+                        commit('setHandAndPoint', res.gameField.playerList)
+                        commit('setTurn', res.status)
+                        break
+                    case "GridSizeChanged()":
+                        commit('setGrid', res.gameField.grid.cells)
+                        commit('setPile', res.gameField.pile)
+                        commit('setHandAndPoint', res.gameField.playerList)
+                        commit('setTurn', res.status)
+                        break
+                    default:
+                        commit('setGrid', res.gameField.grid.cells)
+                        commit('setPile', res.gameField.pile)
+                        commit('setHandAndPoint', res.gameField.playerList)
+                        commit('setTurn', res.status)
+                }
+            } catch (e) {
+                console.error(e)
+            }
+        }
     },
 
 });

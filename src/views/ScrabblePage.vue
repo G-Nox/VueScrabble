@@ -1,17 +1,15 @@
 <template>
-  <div>
-    <div class="container my-2">
-      <div class="row">
-        <div class="col">
+    <v-container class="my-2">
+      <v-row>
+        <v-col>
           <Grid />
           <Hand />
-        </div>
-        <div class="col">
+        </v-col>
+        <v-col>
           <Info />
-        </div>
-      </div>
-    </div>
-  </div>
+        </v-col>
+      </v-row>
+    </v-container>
 </template>
 
 <script>
@@ -29,11 +27,12 @@ export default {
     Hand,
     Info,
   },
-  methods: {},
+    computed: {
+    },
 };
 </script>
 
-<style scoped>
+<style>
 .header {
   padding: 2em;
   width: 100%;
@@ -108,7 +107,7 @@ export default {
   border-radius: 0.3em;
   margin: 0.1em;
 
-  /* background-image: url("../images/card.png"); */
+  background-image: url("../assets/card.png");
   background-size: cover;
   box-shadow: 2px 2px 1px 1px rgba(100, 100, 100, 0.2);
   font-weight: bold;

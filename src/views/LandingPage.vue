@@ -8,12 +8,12 @@
             />
         </v-row>
         <v-row>
-            <v-col class="d-flex flex-column justify-space-between">
+            <v-col class="d-flex flex-column align-stretch">
                 <v-card
                     elevation="5"
-                    class="pa-4 mx-auto mb-2"
+                    class="pa-4 mb-2"
                 >
-                    <h1 class="ma-2">MATH SCRABBLE</h1>
+                    <h1 class="my-2">MATH SCRABBLE</h1>
                     "Math Scrabble" (or "Number Scrabble") is a game based on normal
                     Scrabble, but you make equations instead of words.
                     The letter tiles used in Scrabble are replaced with numbers and
@@ -24,9 +24,9 @@
                 </v-card>
                 <v-card
                     elevation="5"
-                    class="pa-4 mx-auto mt-2"
+                    class="pa-4 mt-2 flex-grow-1"
                 >
-                    <h2 class="ma-2">The Rules</h2>
+                    <h2 class="my-2">The Rules</h2>
                     <ul>
                         <li>Except as noted, game play is similar to normal Scrabble</li>
                         <li>
@@ -87,7 +87,7 @@
                     elevation="5"
                     class="pa-4 mx-auto"
                 >
-                    <h2 class="ma-2">Score</h2>
+                    <h2 class="my-2">Score</h2>
                     <v-data-table
                         :headers="headers"
                         :items="points"
@@ -120,7 +120,6 @@ export default {
     },
     computed: {
         points() {
-            console.log(this.$store.state.card_point)
             return this.$store.state.card_point
         }
     }
