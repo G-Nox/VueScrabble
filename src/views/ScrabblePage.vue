@@ -138,4 +138,20 @@ export default {
 .btn svg {
   margin: 0 3px 3px 0;
 }
+
+@media only screen and (max-width: 800px) {
+    * {
+        font-size: 3vw;
+    }
+    .myCell {
+        min-width: 5vw;
+        min-height: 5vw;
+        font-size: 2.5vw;
+    }
+    .myHand{
+        min-width: 2em;
+        min-height: 2em;
+        font-size: 0.7em;
+    }
+}
 </style>
